@@ -3,10 +3,13 @@ from google import genai
 from google.genai import types
 
 
-# creates a new Gemini file search store for a session
-def create_store(client: genai.Client, session_id: str):
+# returns existing store for user or creates a new one
+def get_or_create_store(client: genai.Client, user_id: str):
+    for store in client.file_search_stores.list():
+        if store.display_name == f"ragforge-{user_id}":
+            return store
     return client.file_search_stores.create(
-        config={"display_name": f"ragforge-{session_id}"}
+        config={"display_name": f"ragforge-{user_id}"}
     )
 
 

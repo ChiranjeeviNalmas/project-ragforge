@@ -6,13 +6,13 @@ router = APIRouter()
 factory = PipelineFactory()
 
 
-# receives a question and returns Gemini's answer using the right pipeline
+# receives question + user_id, searches all of user's docs
 @router.post("/query", response_model=QueryResponse)
 async def query_document(request: QueryRequest):
     pipeline = factory.create(request.pipeline_type)
-    answer = pipeline.query(request.question, request.doc_id)
+    answer = pipeline.query(request.question, request.user_id, request.doc_id)
     return QueryResponse(
         answer=answer,
-        doc_id=request.doc_id,
+        user_id=request.user_id,
         pipeline_used=pipeline.get_type()
     )
