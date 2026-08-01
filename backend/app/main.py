@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 
 from app.api.health import router as health_router
-from app.db.session import lifespan
+from app.db.lifespan import lifespan
 
 app = FastAPI(lifespan=lifespan)
 
