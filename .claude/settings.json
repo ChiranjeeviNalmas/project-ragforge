@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m venv .venv)",
+      "Bash(.venv/bin/pip install *)",
+      "Bash(.venv/bin/uvicorn app.main:app --port 8000)",
+      "Bash(curl -s localhost:8000/health)",
+      "Bash(kill %1)",
+      "Bash(make install-backend *)",
+      "Bash(make run-backend *)",
+      "Bash(make health *)",
+      "Bash(lsof -nP -iTCP:8000 -sTCP:LISTEN)",
+      "Bash(kill 41314)"
+    ]
+  }
+}
